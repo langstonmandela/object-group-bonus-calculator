@@ -75,19 +75,22 @@ function calculateIndividualEmployeeBonus( employee ) {
   else if (revRat === 5){
     bonusPercentage = 0.10;
   }
+  // if employee id number is 4 they get an additional bonus
   if (employee.employeeNumber.length === 4){
     bonusPercentage += 0.05;
   }
   if (annualSalary >= 65000){
     bonusPercentage = bonusPercentage - 0.01;
   }
-  if (totalBonus > 0.13){
-    totalBonus = 0.13;
+  if (bonusPercentage > 0.13){
+    bonusPercentage = 0.13;
   }
-  if (totalBonus < 0.00){
-    totalBonus = 0.00;
+  if (bonusPercentage < 0.00){
+    bonusPercentage = 0.00;
   }
   // calculate total compensation
+  totalCompensation = parseFloat(annualSalary) * bonusPercentage; // changed annualSalary into a float to apply maths
+  totalBonus = totalCompensation + parseFloat(annualSalary);
 
   // calculate total Bonus
   
@@ -96,8 +99,9 @@ function calculateIndividualEmployeeBonus( employee ) {
     name: employee.name,
     bonusPercentage: bonusPercentage,
     totalCompensation: totalCompensation,
-    totalBonus: totalBonus
+    totalBonus: totalBonus.toString() // change the newly converted annualSalary float back into a number
   }
 }
-
-console.log(calculateIndividualEmployeeBonus(employees[0]));
+for (const person of employees){
+  console.log(calculateIndividualEmployeeBonus(person));
+}
