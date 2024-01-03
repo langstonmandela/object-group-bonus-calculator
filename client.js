@@ -47,7 +47,17 @@ console.log('array of employee data: ',  employees );
 
 
 // This function will calculate 1 employee's bonus!
-//
+
+
+function logCurrentEmployeeInfo( employee ){
+  for (const person of employee){
+    console.log(person);
+  }
+}
+
+logCurrentEmployeeInfo(employees);
+
+
 function calculateIndividualEmployeeBonus( employee ) {  
   // your logic here
   
