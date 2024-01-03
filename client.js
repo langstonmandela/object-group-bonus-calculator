@@ -43,12 +43,7 @@ console.log('array of employee data: ',  employees );
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-
-
-
-// This function will calculate 1 employee's bonus!
-
-
+// logs current employee info
 function logCurrentEmployeeInfo( employee ){
   for (const person of employee){
     console.log(person);
@@ -57,11 +52,52 @@ function logCurrentEmployeeInfo( employee ){
 
 logCurrentEmployeeInfo(employees);
 
+// This function will calculate 1 employee's bonus!
 
-function calculateIndividualEmployeeBonus( employee ) {  
-  // your logic here
-  
+function calculateIndividualEmployeeBonus( employee ) { 
+  // Declaring variables  
+  const revRat = employee.reviewRating;
+  const annualSalary = employee.annualSalary;
+  let bonusPercentage;
+  let totalCompensation;
+  let totalBonus;
+
+  // calculate bonus percentage
+  if (revRat <= 2){
+    bonusPercentage = 0.00;
+  }
+  else if(revRat === 3){
+    bonusPercentage = 0.04;
+  }
+  else if (revRat === 4){
+    bonusPercentage = 0.06;
+  }
+  else if (revRat === 5){
+    bonusPercentage = 0.10;
+  }
+  if (employee.employeeNumber.length === 4){
+    bonusPercentage += 0.05;
+  }
+  if (annualSalary >= 65000){
+    bonusPercentage = bonusPercentage - 0.01;
+  }
+  if (totalBonus > 0.13){
+    totalBonus = 0.13;
+  }
+  if (totalBonus < 0.00){
+    totalBonus = 0.00;
+  }
+  // calculate total compensation
+
+  // calculate total Bonus
   
   // return new object with bonus results
-
+  return {
+    name: employee.name,
+    bonusPercentage: bonusPercentage,
+    totalCompensation: totalCompensation,
+    totalBonus: totalBonus
+  }
 }
+
+console.log(calculateIndividualEmployeeBonus(employees[0]));
