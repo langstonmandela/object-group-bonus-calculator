@@ -43,15 +43,65 @@ console.log('array of employee data: ',  employees );
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
+// logs current employee info
+function logCurrentEmployeeInfo( employee ){
+  for (const person of employee){
+    console.log(person);
+  }
+}
 
-
+logCurrentEmployeeInfo(employees);
 
 // This function will calculate 1 employee's bonus!
-//
-function calculateIndividualEmployeeBonus( employee ) {  
-  // your logic here
-  
+
+function calculateIndividualEmployeeBonus( employee ) { 
+  // Declaring variables  
+  const revRat = employee.reviewRating;
+  const annualSalary = employee.annualSalary;
+  let bonusPercentage;
+  let totalCompensation;
+  let totalBonus;
+
+  // calculate bonus percentage
+  if (revRat <= 2){
+    bonusPercentage = 0.00;
+  }
+  else if(revRat === 3){
+    bonusPercentage = 0.04;
+  }
+  else if (revRat === 4){
+    bonusPercentage = 0.06;
+  }
+  else if (revRat === 5){
+    bonusPercentage = 0.10;
+  }
+  // if employee id number is 4 they get an additional bonus
+  if (employee.employeeNumber.length === 4){
+    bonusPercentage += 0.05;
+  }
+  if (annualSalary >= 65000){
+    bonusPercentage = bonusPercentage - 0.01;
+  }
+  if (bonusPercentage > 0.13){
+    bonusPercentage = 0.13;
+  }
+  if (bonusPercentage < 0.00){
+    bonusPercentage = 0.00;
+  }
+  // calculate total compensation
+  totalCompensation = parseFloat(annualSalary) * bonusPercentage; // changed annualSalary into a float to apply maths
+  totalBonus = totalCompensation + parseFloat(annualSalary);
+
+  // calculate total Bonus
   
   // return new object with bonus results
-
+  return {
+    name: employee.name,
+    bonusPercentage: bonusPercentage,
+    totalCompensation: totalCompensation,
+    totalBonus: totalBonus.toString() // change the newly converted annualSalary float back into a number
+  }
+}
+for (const person of employees){
+  console.log(calculateIndividualEmployeeBonus(person));
 }
